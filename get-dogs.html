@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin>
+    </script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <link rel="stylesheet" href="herewego.css">
+    <title>Dogs!</title>
+</head>
+
+
+
+<body>
+    <div id="root"></div>
+
+<script type="text/babel" >
+  
+class Dogs extends React.Component {
+
+state={
+    dogs:"",
+}
+
+componentDidMount(){
+    this.getDogs()
+}
+
+getDogs = () => {
+fetch ('https://dog.ceo/api/breeds/image/random')
+    .then(res => res.json())
+    .then(data=>{
+        console.log(data.message) 
+        this.setState({dogs: data.message})
+    })
+}
+ 
+handleClick = (event) => {
+    event.preventDefault()
+   this.getDogs()
+}
+
+render(){
+    return(
+    <div>
+        <h1>Dogs</h1>
+        <button onClick={this.handleClick}>click me</button>
+        <img src={this.state.dogs} alt="dog"/>
+        {<image/>}
+    </div>
+        )}
+}
+
+
+
+
+ReactDOM.render(<Dogs/>,document.getElementById('root'))
+
+
+
+</script>
+
+
+
+</body>
+</html>
+<!-- // <img src={this.getDogs()} alt="get dog"/> -->
